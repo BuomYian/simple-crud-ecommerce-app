@@ -1,12 +1,13 @@
 # E-Commerce CRUD Web App
 
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white)
-![React](https://img.shields.io/badge/React-20232a?style=for-the-badge&logo=react&logoColor=61dafb)
-![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
-![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)
-![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007acc?style=for-the-badge&logo=typescript&logoColor=white)
+![Prisma](https://img.shields.io/badge/Prisma-1B222D?style=for-the-badge&logo=prisma&logoColor=white)
+![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
+![Material UI](https://img.shields.io/badge/Material--UI-0081CB?style=for-the-badge&logo=mui&logoColor=white)
+![Cloudinary](https://img.shields.io/badge/Cloudinary-3448c5?style=for-the-badge&logo=cloudinary&logoColor=white)
 
-This project is a simple CRUD e-commerce web application built using Next.js. It allows users to browse products, add new products, edit existing products, and delete products. This app is ideal for demonstrating the basic functionality of a modern e-commerce platform.
+This project is a simple CRUD e-commerce web application built with Next.js, TypeScript, Prisma, MySQL, Material UI, and Cloudinary. It allows users to manage products through a clean, user-friendly interface, and supports basic e-commerce functionality.
 
 ## Table of Contents
 
@@ -18,32 +19,33 @@ This project is a simple CRUD e-commerce web application built using Next.js. It
   - [Configuration](#configuration)
   - [Running the App](#running-the-app)
 - [Usage](#usage)
+- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
 - [Contact](#contact)
 
 ## Features
 
-- Browse products with a user-friendly interface.
-- Add new products with essential details like name, description, price, and image.
-- Edit details of existing products.
-- Delete products from the catalog.
-- Responsive design for mobile and desktop.
+- **Product Management:** Create, read, update, and delete products.
+- **Image Upload:** Integrates Cloudinary for image storage and management.
+- **Responsive Design:** Utilizes Material UI for a modern, responsive interface.
+- **Typed Codebase:** Built with TypeScript for type safety and improved development experience.
 
 ## Technologies
 
-- [Next.js](https://nextjs.org/) - The React Framework for Production
-- [React](https://reactjs.org/) - A JavaScript library for building user interfaces
-- [Node.js](https://nodejs.org/) - JavaScript runtime built on Chrome's V8 JavaScript engine
-- [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
-- [MongoDB](https://www.mongodb.com/) - NoSQL database for modern applications
-- [Tailwind CSS](https://tailwindcss.com/) - A utility-first CSS framework for rapid UI development
+- **[Next.js](https://nextjs.org/)** - React framework for server-side rendering and static site generation.
+- **[TypeScript](https://www.typescriptlang.org/)** - Typed superset of JavaScript for writing safer and more scalable code.
+- **[Prisma](https://www.prisma.io/)** - Next-generation ORM for MySQL and other databases.
+- **[MySQL](https://www.mysql.com/)** - Relational database management system.
+- **[Material UI](https://mui.com/)** - React component library for faster and easier web development.
+- **[Cloudinary](https://cloudinary.com/)** - Cloud-based service for image and video management.
 
 ## Prerequisites
 
-- Node.js (v13 or later)
+- Node.js (v14 or later)
 - npm (v6 or later) or yarn (v1.22 or later)
-- MongoDB (local or cloud instance)
+- MySQL (local or cloud instance)
+- Cloudinary account
 
 ## Getting Started
 
@@ -52,7 +54,7 @@ This project is a simple CRUD e-commerce web application built using Next.js. It
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/BuomYian/simple-crud-ecommerce-app.git
+   git clone https://github.com/your-username/simple-crud-ecommerce-app.git
    cd simple-crud-ecommerce-app
    ```
 
@@ -65,14 +67,28 @@ This project is a simple CRUD e-commerce web application built using Next.js. It
 
 ### Configuration
 
-1. Create a `.env.local` file in the root directory and add the following environment variables:
+1. Create a `.env` file in the root directory and add the following environment variables:
 
    ```env
-   MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/mydatabase?retryWrites=true&w=majority
-   NEXT_PUBLIC_API_URL=http://localhost:3000/api
+   DATABASE_URL="mysql://user:password@localhost:3306/mydatabase"
+   CLOUDINARY_CLOUD_NAME=your_cloud_name
+   CLOUDINARY_API_KEY=your_api_key
+   CLOUDINARY_API_SECRET=your_api_secret
+   NEXTAUTH_SECRET=your_nextauth_secret
    ```
 
-   Replace `<username>`, `<password>`, and `mydatabase` with your actual MongoDB credentials and database name.
+   Replace the placeholders with your actual MySQL credentials and Cloudinary API details. Generate a random value for `NEXTAUTH_SECRET` using a generator like `openssl rand -base64 32`.
+
+2. Generate the Prisma client:
+
+   ```bash
+   npx prisma generate
+   ```
+
+3. Run Prisma migrations to set up your database schema:
+   ```bash
+   npx prisma migrate dev --name init
+   ```
 
 ### Running the App
 
@@ -88,10 +104,32 @@ This project is a simple CRUD e-commerce web application built using Next.js. It
 
 ## Usage
 
-- **View Products:** Access the home page to see a list of products.
-- **Add Product:** Click on "Add Product" to create a new product entry.
-- **Edit Product:** Click on the edit icon next to a product to modify its details.
-- **Delete Product:** Click on the delete icon next to a product to remove it from the list.
+- **View Products:** Visit the homepage to see a list of products.
+- **Add Product:** Use the "Add Product" form to create a new product entry.
+- **Edit Product:** Click on a product to view and edit its details.
+- **Delete Product:** Use the delete button to remove a product from the list.
+
+## Project Structure
+
+```
+simple-crud-ecommerce-app/
+├── components/          # React components
+├── pages/               # Next.js pages
+│   ├── api/             # API routes
+│   ├── index.tsx        # Home page
+│   └── product/         # Product pages
+├── prisma/              # Prisma schema
+│   ├── migrations/      # Database migrations
+│   └── schema.prisma    # Prisma schema file
+├── public/              # Static files
+├── styles/              # CSS files
+├── utils/               # Utility functions
+├── .env                 # Environment variables
+├── next.config.js       # Next.js configuration
+├── tsconfig.json        # TypeScript configuration
+├── package.json         # npm/yarn configuration
+└── README.md            # Project documentation
+```
 
 ## Contributing
 

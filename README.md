@@ -111,4 +111,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 - **Name:** Buomkuoth Yian
 - **Email:** buom.nyajal@gmail.com
-- **GitHub:** [your-username](https://github.com/BuomYian)
+- **GitHub:** [BuomYian](https://github.com/BuomYian)
